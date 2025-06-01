@@ -4,8 +4,6 @@ import {
   Users,
   Menu,
   Bell,
-  Sun,
-  Moon,
   X,
   MessageSquare,
   Vote,
@@ -23,55 +21,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/theme/ModeToggle";
+import { useProfile } from "@/hooks/use-profile";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { profile } = useProfile();
 
   return (
     <nav className="sticky top-0 z-40 w-full px-6 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+      <div className="flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
-          <Link to="/" className="mr-6 flex items-center space-x-2">
+          <Link to="/app" className="mr-6 flex items-center space-x-2">
             <span className="font-bold text-xl text-primary">Nemi</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              to="/"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Home
-            </Link>
-            <Link
-              to="/communities"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Communities
-            </Link>
-            <Link
-              to="/discussions"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Discussions
-            </Link>
-            <Link
-              to="/decisions"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Decisions
-            </Link>
-            <Link
-              to="/projects"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Projects
-            </Link>
-            <Link
-              to="/documents"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Documents
-            </Link>
-          </nav>
         </div>
 
         {/* Mobile menu button */}
@@ -88,11 +50,11 @@ export function Navbar() {
         {/* Logo for mobile */}
         <div className="flex md:hidden">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl">EcoCollab</span>
+            <span className="font-bold text-xl">Nemi Hub</span>
           </Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end">
           <nav className="flex items-center space-x-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -123,7 +85,10 @@ export function Navbar() {
                 >
                   <Avatar>
                     <AvatarImage
-                      src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+                      src={
+                        profile?.avatar_url ||
+                        "https://avatar.iran.liara.run/public/girl"
+                      }
                       alt="User"
                     />
                     <AvatarFallback>JD</AvatarFallback>
@@ -154,7 +119,7 @@ export function Navbar() {
         <div className="container py-4">
           <nav className="grid gap-2">
             <Link
-              to="/"
+              to="/app"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >
@@ -162,7 +127,7 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              to="/communities"
+              to="/app/communities"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >
@@ -170,7 +135,7 @@ export function Navbar() {
               Communities
             </Link>
             <Link
-              to="/discussions"
+              to="/app/discussions"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >
@@ -178,7 +143,7 @@ export function Navbar() {
               Discussions
             </Link>
             <Link
-              to="/decisions"
+              to="/app/decisions"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >
@@ -186,7 +151,7 @@ export function Navbar() {
               Decisions
             </Link>
             <Link
-              to="/projects"
+              to="/app/projects"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >
@@ -194,7 +159,7 @@ export function Navbar() {
               Projects
             </Link>
             <Link
-              to="/documents"
+              to="/app/documents"
               className="flex items-center gap-2 text-lg font-medium p-2 hover:bg-accent rounded-md"
               onClick={() => setIsOpen(false)}
             >

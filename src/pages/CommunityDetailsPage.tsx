@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   Users,
@@ -15,130 +15,144 @@ import {
   MapPin,
   Globe,
   Phone,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 
 // Mock community data
 const mockCommunity = {
-  id: '1',
-  name: 'Sunflower Ecovillage',
-  description: 'A vibrant community focused on permaculture and sustainable living in the Pacific Northwest.',
-  image_url: 'https://images.pexels.com/photos/2132180/pexels-photo-2132180.jpeg',
+  id: "1",
+  name: "Sunflower Ecovillage",
+  description:
+    "A vibrant community focused on permaculture and sustainable living in the Pacific Northwest.",
+  image_url:
+    "https://images.pexels.com/photos/2132180/pexels-photo-2132180.jpeg",
   member_count: 45,
   is_public: true,
-  created_at: '2023-05-15',
-  location: 'Portland, Oregon',
-  website: 'https://sunflower-ecovillage.org',
-  email: 'contact@sunflower-ecovillage.org',
-  phone: '+1 (555) 123-4567',
+  created_at: "2023-05-15",
+  location: "Portland, Oregon",
+  website: "https://sunflower-ecovillage.org",
+  email: "contact@sunflower-ecovillage.org",
+  phone: "+1 (555) 123-4567",
   stats: {
     discussions: 128,
     decisions: 45,
     projects: 12,
-    documents: 34
+    documents: 34,
   },
   members: [
     {
-      id: '1',
-      name: 'Emma Watson',
-      avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg',
-      role: 'Admin'
+      id: "1",
+      name: "Emma Watson",
+      avatar:
+        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+      role: "Admin",
     },
     {
-      id: '2',
-      name: 'Tom Hardy',
-      avatar: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg',
-      role: 'Member'
+      id: "2",
+      name: "Tom Hardy",
+      avatar:
+        "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
+      role: "Member",
     },
     {
-      id: '3',
-      name: 'Sarah Johnson',
-      avatar: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg',
-      role: 'Member'
-    }
+      id: "3",
+      name: "Sarah Johnson",
+      avatar:
+        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg",
+      role: "Member",
+    },
   ],
   recentActivity: [
     {
-      id: '1',
-      type: 'discussion',
-      title: 'Summer Solstice Celebration Planning',
+      id: "1",
+      type: "discussion",
+      title: "Summer Solstice Celebration Planning",
       user: {
-        name: 'Emma Watson',
-        avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'
+        name: "Emma Watson",
+        avatar:
+          "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
       },
-      timestamp: '2024-05-08T14:22:00Z'
+      timestamp: "2024-05-08T14:22:00Z",
     },
     {
-      id: '2',
-      type: 'decision',
-      title: 'New Garden Plot Allocation',
+      id: "2",
+      type: "decision",
+      title: "New Garden Plot Allocation",
       user: {
-        name: 'Tom Hardy',
-        avatar: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg'
+        name: "Tom Hardy",
+        avatar:
+          "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
       },
-      timestamp: '2024-05-07T09:15:00Z'
+      timestamp: "2024-05-07T09:15:00Z",
     },
     {
-      id: '3',
-      type: 'project',
-      title: 'Greenhouse Construction',
+      id: "3",
+      type: "project",
+      title: "Greenhouse Construction",
       user: {
-        name: 'Sarah Johnson',
-        avatar: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg'
+        name: "Sarah Johnson",
+        avatar:
+          "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg",
       },
-      timestamp: '2024-05-06T11:30:00Z'
-    }
+      timestamp: "2024-05-06T11:30:00Z",
+    },
   ],
   upcomingEvents: [
     {
-      id: '1',
-      title: 'Monthly Community Meeting',
-      date: '2024-05-15T18:00:00Z',
-      attendees: 28
+      id: "1",
+      title: "Monthly Community Meeting",
+      date: "2024-05-15T18:00:00Z",
+      attendees: 28,
     },
     {
-      id: '2',
-      title: 'Garden Workday',
-      date: '2024-05-18T09:00:00Z',
-      attendees: 15
+      id: "2",
+      title: "Garden Workday",
+      date: "2024-05-18T09:00:00Z",
+      attendees: 15,
     },
     {
-      id: '3',
-      title: 'Sustainable Living Workshop',
-      date: '2024-05-20T14:00:00Z',
-      attendees: 22
-    }
-  ]
+      id: "3",
+      title: "Sustainable Living Workshop",
+      date: "2024-05-20T14:00:00Z",
+      attendees: 22,
+    },
+  ],
 };
 
 export function CommunityDetailsPage() {
   const { id } = useParams();
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState("overview");
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'discussion':
+      case "discussion":
         return <MessageSquare className="h-4 w-4 text-blue-500" />;
-      case 'decision':
+      case "decision":
         return <Vote className="h-4 w-4 text-purple-500" />;
-      case 'project':
+      case "project":
         return <Kanban className="h-4 w-4 text-amber-500" />;
-      case 'document':
+      case "document":
         return <FileText className="h-4 w-4 text-green-500" />;
       default:
         return null;
@@ -149,7 +163,7 @@ export function CommunityDetailsPage() {
     <div className="container py-8">
       <div className="flex items-center gap-4 mb-8">
         <Button variant="ghost" size="sm" asChild>
-          <Link to="/communities">
+          <Link to="/app/communities">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Communities
           </Link>
@@ -164,7 +178,9 @@ export function CommunityDetailsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
         <div className="absolute bottom-0 left-0 p-6">
-          <h1 className="text-4xl font-bold text-white mb-2">{mockCommunity.name}</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">
+            {mockCommunity.name}
+          </h1>
           <div className="flex items-center gap-2">
             {mockCommunity.is_public ? (
               <Badge variant="secondary">
@@ -193,7 +209,11 @@ export function CommunityDetailsPage() {
 
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
-          <Tabs defaultValue="overview" className="mb-8" onValueChange={setActiveTab}>
+          <Tabs
+            defaultValue="overview"
+            className="mb-8"
+            onValueChange={setActiveTab}
+          >
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="members">Members</TabsTrigger>
@@ -206,7 +226,9 @@ export function CommunityDetailsPage() {
                   <CardTitle>About</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-6">{mockCommunity.description}</p>
+                  <p className="text-muted-foreground mb-6">
+                    {mockCommunity.description}
+                  </p>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-1">
                       <div className="flex items-center text-sm">
@@ -215,7 +237,10 @@ export function CommunityDetailsPage() {
                       </div>
                       <div className="flex items-center text-sm">
                         <Globe className="h-4 w-4 mr-2 text-muted-foreground" />
-                        <a href={mockCommunity.website} className="hover:underline">
+                        <a
+                          href={mockCommunity.website}
+                          className="hover:underline"
+                        >
                           {mockCommunity.website}
                         </a>
                       </div>
@@ -223,7 +248,10 @@ export function CommunityDetailsPage() {
                     <div className="space-y-1">
                       <div className="flex items-center text-sm">
                         <Mail className="h-4 w-4 mr-2 text-muted-foreground" />
-                        <a href={`mailto:${mockCommunity.email}`} className="hover:underline">
+                        <a
+                          href={`mailto:${mockCommunity.email}`}
+                          className="hover:underline"
+                        >
                           {mockCommunity.email}
                         </a>
                       </div>
@@ -248,28 +276,36 @@ export function CommunityDetailsPage() {
                           <MessageSquare className="h-4 w-4 mr-2 text-blue-500" />
                           <span>Discussions</span>
                         </div>
-                        <span className="font-medium">{mockCommunity.stats.discussions}</span>
+                        <span className="font-medium">
+                          {mockCommunity.stats.discussions}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <Vote className="h-4 w-4 mr-2 text-purple-500" />
                           <span>Decisions</span>
                         </div>
-                        <span className="font-medium">{mockCommunity.stats.decisions}</span>
+                        <span className="font-medium">
+                          {mockCommunity.stats.decisions}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <Kanban className="h-4 w-4 mr-2 text-amber-500" />
                           <span>Projects</span>
                         </div>
-                        <span className="font-medium">{mockCommunity.stats.projects}</span>
+                        <span className="font-medium">
+                          {mockCommunity.stats.projects}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <FileText className="h-4 w-4 mr-2 text-green-500" />
                           <span>Documents</span>
                         </div>
-                        <span className="font-medium">{mockCommunity.stats.documents}</span>
+                        <span className="font-medium">
+                          {mockCommunity.stats.documents}
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -313,15 +349,25 @@ export function CommunityDetailsPage() {
                 <CardContent>
                   <div className="space-y-4">
                     {mockCommunity.members.map((member) => (
-                      <div key={member.id} className="flex items-center justify-between">
+                      <div
+                        key={member.id}
+                        className="flex items-center justify-between"
+                      >
                         <div className="flex items-center gap-3">
                           <Avatar>
-                            <AvatarImage src={member.avatar} alt={member.name} />
-                            <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                            <AvatarImage
+                              src={member.avatar}
+                              alt={member.name}
+                            />
+                            <AvatarFallback>
+                              {member.name.charAt(0)}
+                            </AvatarFallback>
                           </Avatar>
                           <div>
                             <p className="font-medium">{member.name}</p>
-                            <p className="text-sm text-muted-foreground">{member.role}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {member.role}
+                            </p>
                           </div>
                         </div>
                         <Button variant="ghost" size="sm">
@@ -343,10 +389,18 @@ export function CommunityDetailsPage() {
                 <CardContent>
                   <div className="space-y-6">
                     {mockCommunity.recentActivity.map((activity) => (
-                      <div key={activity.id} className="flex items-start space-x-4">
+                      <div
+                        key={activity.id}
+                        className="flex items-start space-x-4"
+                      >
                         <Avatar>
-                          <AvatarImage src={activity.user.avatar} alt={activity.user.name} />
-                          <AvatarFallback>{activity.user.name.charAt(0)}</AvatarFallback>
+                          <AvatarImage
+                            src={activity.user.avatar}
+                            alt={activity.user.name}
+                          />
+                          <AvatarFallback>
+                            {activity.user.name.charAt(0)}
+                          </AvatarFallback>
                         </Avatar>
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center gap-2">
@@ -354,7 +408,9 @@ export function CommunityDetailsPage() {
                           </div>
                           <div className="flex items-center gap-2">
                             {getActivityIcon(activity.type)}
-                            <span className="font-medium">{activity.title}</span>
+                            <span className="font-medium">
+                              {activity.title}
+                            </span>
                           </div>
                           <p className="text-sm text-muted-foreground">
                             {formatDate(activity.timestamp)}

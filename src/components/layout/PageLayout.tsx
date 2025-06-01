@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { SidebarNav } from "@/components/layout/SidebarNav";
 import { cn } from "@/lib/utils";
 import { Outlet } from "react-router-dom";
+import { Header } from "@/components/layout/Header";
 
 interface PageLayoutProps {
   children?: React.ReactNode;
